@@ -9,24 +9,33 @@
     <script src="../dist/NoSleep.min.js"></script>
 
     <input type="button" id="toggle" value="Wake Lock is disabled" />
+    <p>Note: you wont be able to play music or videos on this device while this screen is open, or the screen may darken.</p>
 
     <script>
+      var options = {disableMuted:true};
       var noSleep = new NoSleep();
 
       var wakeLockEnabled = false;
       var toggleEl = document.querySelector("#toggle");
-      toggleEl.addEventListener('click', function() {
-        if (!wakeLockEnabled) {
-          noSleep.enable(); // keep the screen on!
+
+      function setWakeLockState(isLocked) {
+        if (isLocked) {
+          noSleep.enable(options); // keep the screen on!
           wakeLockEnabled = true;
           toggleEl.value = "Wake Lock is enabled";
           document.body.style.backgroundColor = "green";
         } else {
-          noSleep.disable(); // let the screen turn off.
+          noSleep.disable(options); // let the screen turn off.
           wakeLockEnabled = false;
           toggleEl.value = "Wake Lock is disabled";
           document.body.style.backgroundColor = "";
         }
+      }
+
+      setWakeLockState(true);
+
+      toggleEl.addEventListener('click', function() {
+        setWakeLockState(!wakeLockEnabled);
       }, false);
     </script>
 

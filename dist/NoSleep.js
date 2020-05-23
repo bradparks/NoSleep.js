@@ -139,7 +139,16 @@ var NoSleep = function () {
     }
   }, {
     key: 'enable',
-    value: function enable() {
+    value: function enable(options) {
+      options = options || {};
+      if (!options.disableMuted) {
+        console.log('disable muted');
+        this.noSleepVideo.setAttribute('muted', 'true');
+      } else {
+        console.log('enable muted');
+        this.noSleepVideo.setAttribute('muted', 'false');
+      }
+
       if (oldIOS) {
         this.disable();
         console.warn('\n        NoSleep enabled for older iOS devices. This can interrupt\n        active or long-running network requests from completing successfully.\n        See https://github.com/richtr/NoSleep.js/issues/15 for more details.\n      ');
@@ -155,7 +164,15 @@ var NoSleep = function () {
     }
   }, {
     key: 'disable',
-    value: function disable() {
+    value: function disable(options) {
+      options = options || {};
+      if (!options.disableMuted) {
+        console.log('disable muted');
+        this.noSleepVideo.setAttribute('muted', 'true');
+      } else {
+        console.log('enable muted');
+        this.noSleepVideo.setAttribute('muted', 'false');
+      }
       if (oldIOS) {
         if (this.noSleepTimer) {
           console.warn('\n          NoSleep now disabled for older iOS devices.\n        ');

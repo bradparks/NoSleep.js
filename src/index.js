@@ -42,7 +42,16 @@ class NoSleep {
     element.appendChild(source)
   }
 
-  enable () {
+  enable (options) {
+    options = options || {}
+    if (!options.disableMuted) {
+      console.log('disable muted')
+      this.noSleepVideo.setAttribute('muted', 'true')
+    } else {
+      console.log('enable muted')
+      this.noSleepVideo.setAttribute('muted', 'false')
+    }
+
     if (oldIOS) {
       this.disable()
       console.warn(`
@@ -61,7 +70,15 @@ class NoSleep {
     }
   }
 
-  disable () {
+  disable (options) {
+    options = options || {}
+    if (!options.disableMuted) {
+      console.log('disable muted')
+      this.noSleepVideo.setAttribute('muted', 'true')
+    } else {
+      console.log('enable muted')
+      this.noSleepVideo.setAttribute('muted', 'false')
+    }
     if (oldIOS) {
       if (this.noSleepTimer) {
         console.warn(`
